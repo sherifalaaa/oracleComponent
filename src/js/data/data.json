@@ -1,0 +1,10 @@
+
+[
+
+    {"name":"pedestrains", "items": [42]},
+    {"name":"vehicles", "items": [78]},
+    {"name":"Bicycles", "items": [36]},
+    {"name":"Buses", "items": [22]},
+    {"name":"Trains", "items": [22]}
+
+]

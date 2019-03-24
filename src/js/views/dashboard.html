@@ -1,0 +1,527 @@
+<!--
+ Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+  <h1>Dashboard Content Area</h1>
+   
+  <div class="oj-flex">
+
+      <div class="oj-flex-item oj-panel oj-margin oj-panel-alt1">
+
+          <oj-select-one id="basicSelect" value="{{val}}" style="max-width:20em">
+              <oj-option value="pie">pie</oj-option>
+              <oj-option value="bar">bar</oj-option>
+
+          </oj-select-one>
+
+          <oj-chart
+              type='[[val]]'
+              series='[[datasource]]'
+              animation-on-display="auto"
+              animation-on-data-change="auto"
+              hover-behavior="dim"
+              style="max-width:500px;width:100%;height:350px;">
+          </oj-chart>
+
+          <div id="demo-container">
+
+              <div id="avatar-container" class="demo-flex-display">
+                  <div class="oj-flex">
+                      <div class="oj-flex oj-sm-align-items-center oj-sm-margin-2x">
+                          <div class="of-flex-item">
+                              <oj-avatar role="img" size="[[avatarSize]]" initials='[[initials]]'
+                                         data-bind="attr:{'aria-label':'Avatar of ' + firstName + ' ' + lastName}">
+                              </oj-avatar>
+                          </div>
+                      </div>
+                      <div class="oj-flex oj-sm-align-items-center oj-sm-margin-2x">
+                          <div class="of-flex-item">
+                              <oj-avatar role="img" size="[[avatarSize]]" initials='[[initials]]'
+                                         data-bind="attr:{'aria-label':'Avatar of ' + firstName + ' ' + lastName}"
+                                         src="css/images/avatar_24px_2x.png">
+                              </oj-avatar>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div id="componentDemoContent" style="width: 1px; min-width: 50%; margin-top: 15px">
+
+              <oj-accordion id="accordionPage">
+                  <oj-collapsible id="c1">
+                      <span slot="header"><span><span class="demo-icon-font demo-education-icon-24"></span> Header 1</span></span>
+                      <p>Content 1.</p>
+                  </oj-collapsible>
+                  <oj-collapsible id="c3" expanded>
+                      <span slot="header">Header 3</span>
+                      <div>
+                          <oj-label id="mainlabelid">Colors</oj-label>
+                          <oj-radioset id="radiosetBasicDemoId" value="red" labelled-by="mainlabelid">
+                              <oj-option id="blueopt" value="blue">Blue</oj-option>
+                              <oj-option id="greenopt" value="green">Green</oj-option>
+                              <oj-option id="redopt" value="red">Red</oj-option>
+                          </oj-radioset>
+                      </div>
+                  </oj-collapsible>
+                  <oj-collapsible id="c4">
+                      <span slot="header">Header 4</span>
+                      <div>
+                          <oj-accordion id="nestedAccordion">
+                              <oj-collapsible id="ic1">
+                                  <span slot="header">Inner Header 1</span>
+                                  <p>I'm collapsible inside an inner accordion.</p>
+                              </oj-collapsible>
+                              <oj-collapsible id="ic2">
+                                  <span slot="header">Inner Header 2</span>
+                                  <p>Another collapsible inside an inner accordion.</p>
+                              </oj-collapsible>
+                          </oj-accordion>
+                      </div>
+                  </oj-collapsible>
+              </oj-accordion>
+
+
+          </div>
+          
+          <hr/>
+
+          <div>
+              <tr>
+                  <td>
+                      <label> Rating:</label>
+                  </td>
+                  <td>
+              <oj-rating-gauge id="gauge2"
+                               value="{{ratingValue2}}"
+                               style="width:120px;height:25px;margin-top:20px;">
+
+              </oj-rating-gauge>
+              </td>
+
+              </tr>
+          </div>
+          
+          <br>
+          <hr/>
+         <div id="loadingRegion" aria-busy="true" aria-describedby="progressBar">
+            Loading...
+          </div>
+         
+         <oj-progress id="progressBar" style="width: 200px;margin-top: 20px" value="{{progressValue}}">
+              
+          </oj-progress>
+       
+          <hr/>
+          <br>
+          
+          <oj-file-picker accept="[[acceptArr]]" selection-mode="[[multipleStr]]" on-oj-select='[[selectListener]]'>
+          </oj-file-picker>
+          
+          <div style="padding-top:8px">
+            <oj-label for="selected">Selected files: </oj-label>
+            <span id="selected">
+              <oj-bind-text value="[[ko.toJSON(fileNames)]]"></oj-bind-text>
+            </span>
+          </div>
+          
+          <br>
+          <hr/>
+          
+          <div id='menubutton-container'>
+          <oj-menu-button id="menuButton">
+            Actions
+            <!-- To handle menu item selection, use an action listener as shown, not a click listener. -->
+            <oj-menu id="myMenu" slot="menu" style="display:none" on-oj-action="[[menuItemAction]]">
+              <oj-option id="zoomin" value="Zoom In">
+                <span class="oj-fwk-icon oj-fwk-icon-arrow-n" slot="startIcon"></span>Zoom In
+              </oj-option>
+              <oj-option id="zoomout" value="Zoom Out">
+                <span class="demo-icon-font demo-bookmark-icon-16" slot="startIcon"></span>Zoom Out
+              </oj-option>
+              <oj-option id="divider"></oj-option>
+              <oj-option id="save" value="Save">
+                <span class="demo-icon-font demo-palette-icon-24" slot="startIcon"></span>Save
+              </oj-option>
+              <oj-option id="print" value="Print..." disabled="true">
+                <span class="demo-icon-font demo-chat-icon-24" slot="startIcon"></span>Print...
+              </oj-option>
+            </oj-menu>
+          </oj-menu-button>
+          
+          <p>
+          <p>Last selected menu item:
+            <span id="results"><oj-bind-text value="[[selectedMenuItem]]"></oj-bind-text></span>
+          </p>   
+            
+      </div>
+
+         <br>
+         <hr/>
+         
+        <p>Here is some paragraph text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra, risus ac interdum sollicitudin, sem erat ultrices ipsum, eget vehicula nibh augue sollicitudin ligula. Sed ullamcorper cursus feugiat. Mauris tristique aliquam dictum. Nulla facilisi. Nulla ut sapien sapien. Phasellus tristique arcu id ipsum mattis id aliquam risus sollicitudin. Maecenas dictum, dolor at vehicula vulputate, mi ipsum viverra mauris, eget sollicitudin nulla eros eget metus.
+        </p>
+        <p>Here is some paragraph text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra, risus ac interdum sollicitudin, sem erat ultrices ipsum, eget vehicula nibh augue sollicitudin ligula. Sed ullamcorper cursus feugiat. Mauris tristique aliquam dictum. Nulla facilisi. Nulla ut sapien sapien. Phasellus tristique arcu id ipsum mattis id aliquam risus sollicitudin. Maecenas dictum, dolor at vehicula vulputate, mi ipsum viverra mauris, eget sollicitudin nulla eros eget metus.
+        </p>
+        <p>Here is some paragraph text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra, risus ac interdum sollicitudin, sem erat ultrices ipsum, eget vehicula nibh augue sollicitudin ligula. Sed ullamcorper cursus feugiat. Mauris tristique aliquam dictum. Nulla facilisi. Nulla ut sapien sapien. Phasellus tristique arcu id ipsum mattis id aliquam risus sollicitudin. Maecenas dictum, dolor at vehicula vulputate, mi ipsum viverra mauris, eget sollicitudin nulla eros eget metus. 
+        </p>
+        
+         
+         <hr/>
+         <br>
+         <br>
+        
+        <div id="train-container" >
+            <oj-train id="train"
+                      class="oj-train-stretch"
+                      style="max-width:700px;margin-left:auto;margin-right:auto;"
+                      on-selected-step-changed="[[updateLabelText]]"
+                      selected-step="{{selectedStepValue}}"
+                      steps="[[stepArray]]">
+            </oj-train>
+            <br/>
+            <h3 id="currentStepText"
+                data-bind="text: 'You are on ' + selectedStepLabel()"
+                style="text-align: center">
+            </h3>
+            <br/>
+        </div>
+         
+        <div id='toolbar-container'>
+        
+          <oj-label id='toolbarClassesLabel'></oj-label>
+          <oj-checkboxset id='checkboxSet' aria-labelledby='toolbarClassesLabel' value={{toolbarClassNames}}>
+            <oj-option id='topBorder' value='oj-toolbar-top-border'>
+              .oj-toolbar-top-border (Optional.)
+            </oj-option>
+            <oj-option id='bottomBorder' value='oj-toolbar-bottom-border'>
+              .oj-toolbar-bottom-border (Optional.)
+            </oj-option>
+            <oj-option id='noChrome' value='oj-toolbar-no-chrome'>
+              .oj-toolbar-no-chrome (Optional.  No effect in Alta theme.)
+            </oj-option>
+          </oj-checkboxset>
+          <br><br>
+        
+          <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        
+          <!-- This css binding applies the 0 to 3 style classes selected above. -->
+          <oj-toolbar id='myToolbar' aria-label='Editing Toolbar' aria-controls='controlled'
+               data-bind='css:toolbarClasses'>
+            <oj-button id='chat' display='icons'>
+               <span slot='startIcon' class='demo-icon-font demo-chat-icon-24'></span>
+               Chat
+            </oj-button>
+            <oj-button id='paint' display='icons'>
+               <span slot='startIcon' class='demo-icon-font demo-palette-icon-24'></span>
+               Paint
+            </oj-button>
+            <oj-button id='bookmark' display='icons' disabled='true'>
+               <span slot='startIcon' class='demo-icon-font demo-bookmark-icon-16'></span>
+               Bookmark
+            </oj-button>
+            
+            <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+            
+            <oj-buttonset-many id="checkWrapper" focus-management="none"> 
+              <oj-option id="toggle">
+                Toggle
+              </oj-option>
+            </oj-buttonset-many>
+            
+            <oj-menu-button id="menuButton">
+              Menu Button
+              <oj-menu id="myMenu" slot="menu" style="display:none">
+                <oj-option id="save" value="Save">
+                  <span class="demo-icon-font demo-palette-icon-24" slot="startIcon"></span>Save
+                </oj-option>
+                <oj-option id="zoomin" value="Zoom In">
+                  <span class="oj-fwk-icon oj-fwk-icon-arrow-n" slot="startIcon"></span>Zoom In
+                </oj-option>
+                <oj-option id="zoomout" value="Zoom Out">
+                  <span class="demo-icon-font demo-bookmark-icon-16" slot="startIcon"></span>Zoom Out
+                </oj-option>
+                <oj-option id="print" value="Print..." disabled="true">
+                  <span class="demo-icon-font demo-chat-icon-24" slot="startIcon"></span>Print...
+                </oj-option>
+              </oj-menu>
+            </oj-menu-button>
+            
+            <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+            
+            <oj-buttonset-one id="drinkset" focus-management="none">
+              <!-- ko foreach: drinkValues -->
+              <oj-option value="[[id]]">
+                <span data-bind="text: label"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-buttonset-one>
+            
+            <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+            
+            <oj-buttonset-many id="iconset" display="icons" focus-management="none">
+              <!-- ko foreach: someButtons -->
+              <oj-option value="[[id]]">
+                <span slot="startIcon" data-bind="css: icon"></span>
+                <span data-bind="text: id"></span>
+              </oj-option>
+              <!-- /ko -->
+            </oj-buttonset-many>
+          </oj-toolbar>
+        
+          <!-- In a real app, the element referenced by aria-controls would actually be updated in some way by the toolbar. -->
+          <br><br><a id='controlled' href='#'>Element referenced by toolbar's aria-controls</a>
+        
+        </div>
+         
+         <hr/>
+         <br>
+         
+        <oj-label-value>
+            <oj-label slot="label" for="myit">User Name</oj-label>
+            <oj-input-text id="myit" slot="value" value="Text"></oj-input-text>
+         </oj-label-value>  
+         
+         <oj-label-value>
+            <oj-label slot="label" for="myit">Password</oj-label>
+            <oj-input-password id="password" value="">
+         </oj-label-value> 
+       
+         <br/>
+         <br/>
+
+        <oj-text-area id="text-area" value="text area ">
+        </oj-text-area>
+         
+          
+         <oj-label for="spinnercontrol">input number</oj-label>       
+         <oj-input-number id="inputnumber-id"
+                         max= "[[max]]"
+                         min= "[[min]]"
+                         step= "[[step]]" 
+                         value="{{currentValue}}">
+        </oj-input-number>
+         
+        <span>Current component value is: </span>
+        <span id="curr-value" data-bind="text: currentValue"></span>
+       
+  
+      </div>
+
+      <div class="oj-flex-item oj-panel oj-margin oj-panel-alt1">
+
+                         <div id="componentLitView" style="width: 1px; min-width: 50%; margin-top: 20px">
+
+              <oj-list-view id="listview" aria-label="list with static data" selection-mode="multiple" >
+                  <ul>
+                      <li id="amybartlet">
+                          <span class="avatar" style="background-image:url('images/img4.jpg') "></span>
+                          <div class="container">
+                              <div>
+                                  <span class="name">Amy Bartlet</span>
+                              </div>
+                              <div>
+                                  <span class="oj-text-xs oj-text-secondary-color">Vice President</span>
+                              </div>
+                          </div>
+                      </li>
+                      <li id="andyjones">
+                          <span class="avatar" style="background-image: url('images/avatar_24px_2x.png')"></span>
+                          <div class="container">
+                              <div>
+                                  <span class="name">Andy Jones</span>
+                              </div>
+                              <div>
+                                  <span class="oj-text-xs oj-text-secondary-color">Director</span>
+                              </div>
+                          </div>
+                      </li>
+                      <li id="andrewbugsy">
+                          <span class="avatar" style="background-image: url('images/dvt/11.png')"></span>
+                          <div class="container">
+                              <div>
+                                  <span class="name">Andrew Bugsy</span>
+                              </div>
+                              <div>
+                                  <span class="oj-text-xs oj-text-secondary-color">Individual Contributer</span>
+                              </div>
+                          </div>
+                      </li>
+                      <li id="annettbarnes">
+                          <span class="avatar" style="background-image: url('images/dvt/2.png')"></span>
+                          <div class="container">
+                              <div>
+                                  <span class="name">Annett Barnes</span>
+                              </div>
+                              <div>
+                                  <span class="oj-text-xs oj-text-secondary-color">Individual Contributer</span>
+                              </div>
+                          </div>
+                      </li>
+                      <li id="bobjones">
+                          <span class="avatar" style="background-image: url('images/dvt/12.png')"></span>
+                          <div class="container">
+                              <div>
+                                  <span class="name">Bob Jones</span>
+                              </div>
+                              <div>
+                                  <span class="oj-text-xs oj-text-secondary-color">Salesman</span>
+                              </div>
+                          </div>
+                          </oj-list-view >
+
+                          </div>
+
+                          <div id="componentDemoContent" style="width: 1px; min-width: 50%; margin-top: 25px;">
+                              <div id="div1">
+
+                                  <oj-label for="dateTime"></oj-label>
+                                  <oj-input-date-time id="dateTime" value='{{value}}'>
+                                  </oj-input-date-time>
+
+                                  <br/><br/>
+
+                                  <span class="oj-label">Current component value is:</span>
+                                  <span data-bind="text: value"></span>
+
+                              </div>
+
+
+                          </div>
+
+                          <div id="componentDemoContent" style="width: 1px; min-width: 100%;  background-color: #E5F6EA; margin-top: 30px; ">  
+                              <oj-table id='table' aria-label='Departments Table'
+                                        data='[[dataprovider]]' 
+                                        columns-default.sortable='disabled' 
+                                        columns='[{"headerText": "Department Id", 
+                                        "field": "DepartmentId",
+                                        "headerClassName": "oj-sm-only-hide",
+                                        "className": "oj-sm-only-hide"},
+                                        {"headerText": "Department Name", 
+                                        "field": "DepartmentName"},
+                                        {"headerText": "Location Id", 
+                                        "field": "LocationId",
+                                        "headerClassName": "oj-sm-only-hide",
+                                        "className": "oj-sm-only-hide"},
+                                        {"headerText": "Manager Id", 
+                                        "field": "ManagerId"}]'
+                                        style='width: 100%; height:100%;'>
+
+
+                              </oj-table>
+
+
+                          </div>
+
+                          <hr/>
+          
+                          <div id="slidersDemoContent" style="width: 1px; min-width: 100%; margin-top: 25px;">
+
+                              <div id="slider-container">
+                                  <oj-label for="slider"> price filter </oj-label>
+                                  <oj-slider id="slider" value="{{valuee}}" min="[[min]]" max="[[max]]" step="[[step]]"> </oj-slider>
+                                  <br>
+                                  <span> Value: </span>
+                                  <span id="value" data-bind="text: valuee"></span>
+
+                              </div>  
+                          </div>
+
+                          <hr/>
+          
+                          <div id="tabbarcontainer" style="margin-top: 20px; margin-bottom: 20px;">
+                              <oj-tab-bar 
+                                  edge="[[edge]]" 
+                                  selection="{{selectedItem}}">
+                                  <ul>
+                                      <li id="home">
+                                          <a href="#">
+                                              <span class="oj-tabbar-item-icon
+                          demo-home-icon-24 demo-icon-font-24">
+                                              </span>
+                                              Home
+                                          </a>
+                                      </li>
+                                      <li id="gettingstarted">
+                                          <a href="#">
+                                              <span class="oj-tabbar-item-icon
+                          demo-education-icon-24 demo-icon-font-24">
+                                              </span>
+                                              Getting Started
+                                          </a>
+                                      </li>
+                                      <li id="cookbook" class="oj-enabled">
+                                          <a href="#">
+                                              <span class="oj-tabbar-item-icon
+                          demo-catalog-icon-24 demo-icon-font-24">
+                                              </span>
+                                              Cookbook
+                                          </a>
+                                      </li>
+                                      <li id="stylelab" >
+                                          <a href="#" >
+                                              <span class="oj-tabbar-item-icon
+                          demo-palette-icon-24 demo-icon-font-24">
+                                              </span>
+                                              Style Lab
+                                          </a>
+                                      </li>
+                                  </ul>
+                              </oj-tab-bar>
+                              <br>
+                          </div>
+
+                          <div>
+                              <p class="bold">Last selected list item:
+                                  <span id="results" data-bind='text: selectedItem'></span>
+                              </p>
+                          </div>
+          
+                            <hr/>
+
+                         <div id="conveyorbelt-horizontal-example">
+          
+          <div class="oj-flex">
+            <oj-conveyor-belt class="oj-lg-6 oj-md-9 oj-sm-12">
+              <oj-button class="demo-button">Hydrogen</oj-button>
+              <oj-button class="demo-button">Helium</oj-button>
+              <oj-button class="demo-button">Lithium</oj-button>
+              <oj-button class="demo-button">Beryllium</oj-button>
+              <oj-button class="demo-button">Boron</oj-button>
+              <oj-button class="demo-button">Carbon</oj-button>
+              <oj-button class="demo-button">Nitrogen</oj-button>
+              <oj-button class="demo-button">Oxygen</oj-button>
+              <oj-button class="demo-button">Fluorine</oj-button>
+              <oj-button class="demo-button">Neon</oj-button>
+              <oj-button class="demo-button">Sodium</oj-button>
+              <oj-button class="demo-button">Magnesium</oj-button>
+            </oj-conveyor-belt>
+          </div>
+        </div>
+
+                             <hr/>
+                             <br>
+                            
+                            <a href="https://www.google.com.eg/webhp?tab=rw">CLICK TO OPEN GOOGLE WEBSITE
+                            </a>   
+                             
+                             <oj-label id="mainlabelid">Colors</oj-label>
+
+                             <oj-radioset id="radiosetBasicDemoId" labelled-by="mainlabelid"
+                                          value="{{currentColor}}" >
+                               
+                                 <oj-bind-for-each data="[[colorOptions]]">
+                                     <template>
+                                         <oj-option id="[[$current.data.id]]" value="[[$current.data.value]]">
+                                             <oj-bind-text value="[[$current.data.color]]"></oj-bind-text>
+                                         </oj-option>
+                                     </template>
+                                 </oj-bind-for-each>
+                             </oj-radioset>
+         
+
+                          </div>
+
+                          </div>
+</div>
